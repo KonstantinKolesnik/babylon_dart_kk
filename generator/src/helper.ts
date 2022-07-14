@@ -168,10 +168,12 @@ export const filterItemFromMethod = (method: Method): FilterItem => {
 }
 
 export const includeSecondLevel = (topLevelName: string, filterItem: FilterItem): boolean => {
-    if (!config.secondLevelConfigs[topLevelName]) {
+    const secondLevelConfig = config.secondLevelConfigs[topLevelName];
+
+    if (!secondLevelConfig) {
         return false;
     }
-    const secondLevelConfig = config.secondLevelConfigs[topLevelName];
+
     if (testFilter(secondLevelConfig.exclude, filterItem)) {
         return false;
     }
