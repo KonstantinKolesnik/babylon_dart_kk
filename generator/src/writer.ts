@@ -2,6 +2,7 @@ import { Library, Class, Constructor, Method, TypeLiteralType, Parameter, Scope,
 import { config } from "./config";
 import { filterItemFromMethod, filterItemFromName, firstScopeOfKind, includeSecondLevel, isFirstOptionalParam, isLastOptionalParam, isTypeLiteralType, methodToFunctionType, override, treatAsObjectLiteral, typeLiteralNameFromScope, typeToString } from "./helper";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
+import * as rimraf from 'rimraf';
 
 class Writer {
     private lines: string[] = [];
@@ -413,6 +414,8 @@ const writeFunctionAliases = (library: Library, writer: Writer): void => {
 }
 
 export const writeLibrary = (library: Library): void => {
+    rimraf.sync(config.outFolder);
+
     for (const clazz of library.classes) {
         writeClass(library, clazz, new Writer(clazz.name.toLowerCase() + ".dart"));
     }
