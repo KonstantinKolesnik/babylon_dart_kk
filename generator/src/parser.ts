@@ -270,6 +270,7 @@ const parseClass = (node: ts.ClassDeclaration, checker: ts.TypeChecker): Class =
                 for (const modifier of node.modifiers) {
                     if (modifier.getText().trim() === "abstract") {
                         isAbstract = true;
+                        break;
                     }
                 }
             }
@@ -280,6 +281,7 @@ const parseClass = (node: ts.ClassDeclaration, checker: ts.TypeChecker): Class =
                     typeParams.push(typeParam.name.getText());
                 }
             }
+
             let superType: TypeType = null;
             const interfaces: TypeType[] = [];
             if (node.heritageClauses) {
@@ -388,7 +390,6 @@ const parseNode = (node: ts.Node, checker: ts.TypeChecker, library: Library): vo
     else {
         ts.forEachChild(node, (n) => parseNode(n, checker, library));
     }
-
 };
 
 export const parseLibraries = (): Library => {
@@ -411,5 +412,6 @@ export const parseLibraries = (): Library => {
             parseNode(sourceFile, checker, library);
         }
     }
+
     return library;
 };
