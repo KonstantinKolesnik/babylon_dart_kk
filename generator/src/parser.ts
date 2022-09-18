@@ -71,7 +71,6 @@ const parseProperties = (node: ts.Node, checker: ts.TypeChecker, debug?: boolean
     return result;
 }
 
-
 const parseType = (typeNode: ts.Node, checker: ts.TypeChecker): Type => {
     if (ts.isArrayTypeNode(typeNode)) {
         const elementType = parseType(typeNode.elementType, checker);
@@ -246,7 +245,7 @@ const parseMethods = (node: ts.Node, checker: ts.TypeChecker, debug?: boolean): 
 
 const parseMethod = (node: ts.MethodDeclaration | ts.MethodSignature | ts.SignatureDeclarationBase, checker: ts.TypeChecker, fallbackName: string = null): Method => {
     var name = fallbackName;
-    if(node.name) {
+    if (node.name) {
         name = node.name.getText();
     }
     if (!isHidden(name)) {
@@ -260,10 +259,11 @@ const parseMethod = (node: ts.MethodDeclaration | ts.MethodSignature | ts.Signat
     }
 }
 
+
 const parseClass = (node: ts.ClassDeclaration, checker: ts.TypeChecker): Class => {
     const symbol = checker.getSymbolAtLocation(node.name);
 
-    if (includeTopLevel(symbol.getName()) && (isExported(node) || forceExport(symbol.getName()))) {
+    if (/*includeTopLevel(symbol.getName()) &&*/ (isExported(node) || forceExport(symbol.getName()))) {
         if (!isHidden(symbol.getName())) {
             let isAbstract = false;
             if (node.modifiers) {
@@ -316,7 +316,7 @@ const parseClass = (node: ts.ClassDeclaration, checker: ts.TypeChecker): Class =
 
 const parseInterface = (node: ts.InterfaceDeclaration, checker: ts.TypeChecker): Interface => {
     const symbol = checker.getSymbolAtLocation(node.name);
-    if (includeTopLevel(symbol.getName())) {
+    //if (includeTopLevel(symbol.getName())) {
         if (!isHidden(symbol.getName())) {
             const typeParams: string[] = [];
             if (node.typeParameters) {
@@ -349,8 +349,8 @@ const parseInterface = (node: ts.InterfaceDeclaration, checker: ts.TypeChecker):
             };
             return interfaze;
         }
-    }
-    return null;
+    //}
+    //return null;
 }
 
 const parseEnum = (node: ts.EnumDeclaration, checker: ts.TypeChecker): Enum => {
@@ -365,18 +365,19 @@ const parseEnum = (node: ts.EnumDeclaration, checker: ts.TypeChecker): Enum => {
 
 const parseNode = (node: ts.Node, checker: ts.TypeChecker, library: Library): void => {
     if (ts.isClassDeclaration(node)) {
-        const clazz = parseClass(node, checker);
-        if (clazz) {
-            library.classes.push(clazz);
-        }
+        // const clazz = parseClass(node, checker);
+        // if (clazz) {
+        //     library.classes.push(clazz);
+        // }
     } else if (ts.isInterfaceDeclaration(node)) {
-        const interfaze = parseInterface(node, checker);
-        if (interfaze) {
-            library.interfaces.push(interfaze);
-        }
+        // const interfaze = parseInterface(node, checker);
+        // if (interfaze) {
+        //     library.interfaces.push(interfaze);
+        // }
     } else if (ts.isEnumDeclaration(node)) {
         const enm = parseEnum(node, checker);
-        if (enm) {
+        //if (enm) {
+        if (enm && !library.enums.map(e => e.name).includes(enm.name)) {
             library.enums.push(enm);
         }
     } else if (ts.isTypeAliasDeclaration(node)) {

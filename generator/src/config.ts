@@ -3,7 +3,13 @@ import { Config } from "./model";
 export const config = <Config>{
     fileNames: [
         "node_modules/babylonjs/babylon.module.d.ts",
-        "node_modules/babylonjs-serializers/babylonjs.serializers.module.d.ts"
+        //"node_modules/babylonjs-serializers/babylonjs.serializers.module.d.ts",
+
+        //"node_modules/babylonjs-gui/babylon.gui.module.d.ts",
+        //"node_modules/babylonjs-loaders/babylonjs.loaders.module.d.ts",
+        //"node_modules/babylonjs-materials/babylonjs.materials.module.d.ts",
+        //"node_modules/babylonjs-post-process/babylon.postProcess.module.d.ts",
+        //"node_modules/babylonjs-procedural-textures/babylon.proceduralTextures.module.d.ts",
     ],
     libraryName: "babylon",
     outFolder: "../package/lib/src",
@@ -26,6 +32,7 @@ export const config = <Config>{
         "ArrayLike<#1>": "List<#1>",
         "Nullable<#1>": "#1",
         "Array<#1>": "List<#1>",
+        "Array": "List",
         "Partial<#1>": "#1",
         "ClientRect": "Rectangle",
         "WebGLProgram": "Program",
@@ -46,12 +53,169 @@ export const config = <Config>{
     secondLevelConfigs: {
         __type_alias__: {
             exclude: [
-                "RenderingMeshStageAction", // not yet generated
-                "WebXRFeatureConstructor", // not yet generated
-                "MotionControllerConstructor", // not yet generated
-                "XRFrameRequestCallback", // not yet generated
+                //"RenderingMeshStageAction", // not yet generated
+                //"WebXRFeatureConstructor", // not yet generated
+                //"MotionControllerConstructor", // not yet generated
+                //"XRFrameRequestCallback", // not yet generated ???
             ]
         },
+
+        // enums:
+        AnimatedInputBlockTypes: {},
+        AnimationKeyInterpolation: {},
+        AssetTaskState: {},
+        ConditionalBlockConditions: {},
+        Coordinate: {},
+        DebugLayerTab: {},
+        DepthOfFieldEffectBlurLevel: {},
+        DeviceInputEventType: {},
+        DeviceType: {},
+        DualSenseInput: {},
+        DualShockButton: {},
+        DualShockDpad: {},
+        DualShockInput: {},
+        GLTFLoaderAnimationStartMode: {},
+        GLTFLoaderCoordinateSystemMode: {},
+        GLTFLoaderState: {},
+        HandConstraintOrientation: {},
+        HandConstraintVisibility: {},
+        HandPart: {},
+        InspectableType: {},
+        InternalTextureSource: {},
+        JoystickAxis: {},
+        NodeMaterialBlockConnectionPointMode: {},
+        NodeMaterialBlockConnectionPointTypes: {},
+        NodeMaterialBlockTargets: {},
+        NodeMaterialConnectionPointCompatibilityStates: {},
+        NodeMaterialConnectionPointDirection: {},
+        NodeMaterialModes: {},
+        NodeMaterialSystemValues: {},
+        Orientation: {},
+        PhysicsRadialImpulseFalloff: {},
+        PhysicsUpdraftMode: {},
+        PointColor: {},
+        PointerInput: {},
+        PoseEnabledControllerType: {},
+        SceneLoaderAnimationGroupLoadingMode: {},
+        ShaderLanguage: {},
+        SimplificationType: {},
+        Space: {},
+        SubEmitterType: {},
+        SwitchInput: {},
+        TimerState: {},
+        TonemappingOperator: {},
+        TrigonometryBlockOperations: {},
+        WaveBlockKind: {},
+        WebXRNearControllerMode: {},
+        WebXRState: {},
+        WebXRTrackingState: {},
+        XRHandJoint: {},
+        Xbox360Button: {},
+        Xbox360Dpad: {},
+        XboxInput: {},
+
+        // interfaces:
+        IAction: {},
+        IActionEvent: {},
+        IAgentParameters: {
+            treatAsObjectLiteral: true,
+        },
+        IAnimatable: {},
+        IAudioEngine: {},
+        IBehaviorAware: {},
+        IClipPlanesHolder: {},
+        ICollisionCoordinator: {},
+        IColor4Like: {},
+        ICreateCapsuleOptions: {},
+        ICrowd: {},
+        ICullable: {},
+        ICustomAnimationFrameRequester: {},
+        ICustomShaderNameResolveOptions: {},
+        IDisplayChangedEventArgs: {},
+        IDisposable: {},
+        IEasingFunction: {},
+        IEdgesRendererOptions: {},
+        IEffectFallbacks: {},
+        IEnvironmentHelperOptions: {},
+        IExplorerExtensibilityGroup: {},
+        IExplorerExtensibilityOption: {},
+        IExportOptions: {},
+        IGetSetVerticesData: {},
+        IGlowLayerOptions: {},
+        IHighlightLayerOptions: {},
+        IImageProcessingConfigurationDefines: {},
+        IInspectable: {},
+        IInspectorOptions: {
+            treatAsObjectLiteral: true,
+        },
+        IIOptionShadowDepthMaterial: {},
+        ILoadingScreen: {},
+        IMaterialAnisotropicDefines: {},
+        IMaterialBRDFDefines: {},
+        IMaterialClearCoatDefines: {},
+        IMaterialCompilationOptions: {},
+        IMaterialSheenDefines: {},
+        IMaterialSubSurfaceDefines: {},
+        IMotorEnabledJoint: {},
+        ImageProcessingConfiguration: {},
+        ImageProcessingPostProcess: {},
+        IMaterialDetailMapDefines: {},
+        IMultiRenderTargetOptions: {},
+        INavigationEnginePlugin: {},
+        INavMeshParameters: {
+            treatAsObjectLiteral: true,
+        },
+        InstancedMesh: {},
+        IntersectionInfo: {},
+        InternalTexture: {},
+        InstancingAttributeInfo: {},
+        IOfflineProvider: {},
+        IPhysicsEnabledObject: {
+            exclude: [
+                "rotate", // not yet generatd
+                "translate", // not yet generatd
+            ]
+        },
+        IPhysicsEngine: {},
+        IPhysicsEnginePlugin: {
+            include: [] // CannonJSPlugin does not implement many methods
+        },
+        IPipelineContext: {},
+        IPlaneLike: {},
+        IRenderingManagerAutoClearSetup: {},
+        //IRenderTargetTexture: {},
+        ISceneComponent: {},
+        ISceneLike: {},
+        IShadowGenerator: {
+            exclude: [
+                "forceCompilation", // mix of replaceType() and type literal
+                "forceCompilationAsync", // mix of replaceType() and type literal
+            ]
+        },
+        IShadowLight: {},
+        ISimplificationSettings: {},
+        ISimplificationTask: {
+            include: [] // not yet generated
+        },
+        ISize: {},
+        ISmartArrayLike: {},
+        //ISortableLight: {},
+        ISoundOptions: {},
+        ISoundTrackOptions: {},
+        ISpriteManager: {},
+        //IStencilState: {},
+        IVector3Like: {},
+        IViewportLike: {},
+        IViewportOwnerLike: {
+            forceExport: true
+        },
+        IVRPresentationAttributes: {},
+
+
+
+
+
+        // classes:
         AbstractActionManager: {
             exclude: [
                 "Triggers", // type literal not generated
@@ -113,6 +277,7 @@ export const config = <Config>{
             ]
         },
         BackEase: {},
+        //BaseSixDofDragBehavior: {},
         BaseSubMesh: {},
         BaseTexture: {},
         Behavior: {},
@@ -162,7 +327,6 @@ export const config = <Config>{
         CubeTexture: {},
         DataBuffer: {},
         DebugLayer: {},
-        DebugLayerTab: {},
         DepthCullingState: {},
         DepthRenderer: {},
         DepthSortedParticle: {},
@@ -224,104 +388,11 @@ export const config = <Config>{
         GlowLayer: {},
         GLTFData: {},
         GLTF2Export: {},
+        //GridMaterial: {},
         GroundMesh: {},
         HemisphericLight: {},
         HighlightLayer: {},
         HostInformation: {},
-        IAction: {},
-        IActionEvent: {},
-        IAgentParameters: {
-            treatAsObjectLiteral: true,
-        },
-        IAnimatable: {},
-        IAudioEngine: {},
-        IBehaviorAware: {},
-        IClipPlanesHolder: {},
-        ICollisionCoordinator: {},
-        IColor4Like: {},
-        ICreateCapsuleOptions: {},
-        ICrowd: {},
-        ICullable: {},
-        ICustomAnimationFrameRequester: {},
-        ICustomShaderNameResolveOptions: {},
-        IDisplayChangedEventArgs: {},
-        IDisposable: {},
-        IEasingFunction: {},
-        IEdgesRendererOptions: {},
-        IEffectFallbacks: {},
-        IEnvironmentHelperOptions: {},
-        IExplorerExtensibilityGroup: {},
-        IExplorerExtensibilityOption: {},
-        IExportOptions: {},
-        IGetSetVerticesData: {},
-        IGlowLayerOptions: {},
-        IHighlightLayerOptions: {},
-        IImageProcessingConfigurationDefines: {},
-        IInspectable: {},
-        IInspectorOptions: {
-            treatAsObjectLiteral: true,
-        },
-        IIOptionShadowDepthMaterial: {},
-        ILoadingScreen: {},
-        IMaterialAnisotropicDefines: {},
-        IMaterialBRDFDefines: {},
-        IMaterialClearCoatDefines: {},
-        IMaterialCompilationOptions: {},
-        IMaterialSheenDefines: {},
-        IMaterialSubSurfaceDefines: {},
-        IMotorEnabledJoint: {},
-        ImageProcessingConfiguration: {},
-        ImageProcessingPostProcess: {},
-        IMaterialDetailMapDefines: {},
-        IMultiRenderTargetOptions: {},
-        INavigationEnginePlugin: {},
-        INavMeshParameters: {
-            treatAsObjectLiteral: true,
-        },
-        InspectableType: {},
-        InstancedMesh: {},
-        InternalTextureSource: {},
-        IntersectionInfo: {},
-        InternalTexture: {},
-        InstancingAttributeInfo: {},
-        IOfflineProvider: {},
-        IPhysicsEnabledObject: {
-            exclude: [
-                "rotate", // not yet generatd
-                "translate", // not yet generatd
-            ]
-        },
-        IPhysicsEngine: {},
-        IPhysicsEnginePlugin: {
-            include: [] // CannonJSPlugin does not implement many methods
-        },
-        IPipelineContext: {},
-        IPlaneLike: {},
-        IRenderingManagerAutoClearSetup: {},
-        ISceneComponent: {},
-        ISceneLike: {},
-        IShadowGenerator: {
-            exclude: [
-                "forceCompilation", // mix of replaceType() and type literal
-                "forceCompilationAsync", // mix of replaceType() and type literal
-            ]
-        },
-        IShadowLight: {},
-        ISimplificationSettings: {},
-        ISimplificationTask: {
-            include: [] // not yet generated
-        },
-        ISize: {},
-        ISmartArrayLike: {},
-        ISoundOptions: {},
-        ISoundTrackOptions: {},
-        ISpriteManager: {},
-        IVector3Like: {},
-        IViewportLike: {},
-        IViewportOwnerLike: {
-            forceExport: true
-        },
-        IVRPresentationAttributes: {},
         KeyboardInfo: {},
         KeyboardInfoPre: {},
         Layer: {},
@@ -349,6 +420,7 @@ export const config = <Config>{
         },
         MaterialDefines: {},
         MaterialOnEffectCreatedObservable: {},
+        //MaterialPluginBase: {},
         Matrix: {},
         MultiMaterial: {},
         Mesh: {
@@ -364,6 +436,7 @@ export const config = <Config>{
             ]
         },
         MeshBuilder: {},
+        //MeshBuilderCreateBoxOptions: {},
         ModelShape: {},
         MorphTarget: {},
         MorphTargetManager: {},
@@ -479,6 +552,7 @@ export const config = <Config>{
             convertFunctionPropertiesToFunctions: true,
         },
         PrePassRenderer: {},
+        //Promise: {},
         PushMaterial: {},
         Quaternion: {},
         Ray: {},
@@ -539,7 +613,6 @@ export const config = <Config>{
         SolidParticleVertex: {},
         Sound: {},
         SoundTrack: {},
-        Space: {},
         SphericalHarmonics: {},
         SphericalPolynomial: {},
         Sprite: {
@@ -568,6 +641,7 @@ export const config = <Config>{
         SubSurfaceScatteringPostProcess: {},
         TargetCamera: {},
         Texture: {},
+        //TextureSampler: {},
         ThinEngine: {
             exclude: [
                 "ExceptionList", // not yet supported

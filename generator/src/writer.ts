@@ -266,7 +266,7 @@ const writeClass = (library: Library, clazz: Class, writer: Writer): void => {
         name: clazz.name
     };
 
-    writer.writeLine("part of " + config.libraryName + ";");
+    // writer.writeLine("part of " + config.libraryName + ";");
 
     const typeLiterals = typeLiteralsForClassOrInterface(clazz);
     Object.keys(typeLiterals).forEach(name => {
@@ -340,8 +340,8 @@ const writeInterface = (library: Library, interfaze: Interface, writer: Writer):
             name: interfaze.name
         };
 
-        writer.writeLine("part of " + config.libraryName + ";");
-        writer.writeLine();
+        // writer.writeLine("part of " + config.libraryName + ";");
+        // writer.writeLine();
 
         if (treatAsObjectLiteral(interfaze.name)) {
             const typeLiteral: TypeLiteralType = {
@@ -385,15 +385,21 @@ const writeInterface = (library: Library, interfaze: Interface, writer: Writer):
 }
 
 const writeEnum = (library: Library, enm: Enum, writer: Writer): void => {
-    writer.writeLine("part of " + config.libraryName + ";");
-    writer.writeLine();
+    // writer.writeLine("part of " + config.libraryName + ";");
+    // writer.writeLine();
+
     writer.writeLine("/// enum " + enm.name);
     writer.writeLine("@JS()");
     writer.writeLine("class " + enm.name + " {");
     for (const member of enm.members) {
-        writer.writeLine("  external static num get " + member + ";");
+        // if (member.includes("\"")) {
+        //     writer.writeLine("  external static num get " + member.split("\"").join("") + ";");
+        // }
+        // else
+            writer.writeLine("  external static num get " + member + ";");
     }
     writer.writeLine("}");
+    writer.writeLine();
     writer.toFile();
 }
 
@@ -403,9 +409,10 @@ const writeFunctionAliases = (library: Library, writer: Writer): void => {
         name: "__type_alias__"
     };
     
-    writer.writeLine("part of " + config.libraryName + ";");
-    writer.writeLine();
-    for (const functionAlias of library.functionAliases) {
+    // writer.writeLine("part of " + config.libraryName + ";");
+    // writer.writeLine();
+
+    for (const functionAlias of library.functionAliases.sort((a, b) => a.name.localeCompare(b.name))) {
         if (includeSecondLevel(scope.name, filterItemFromMethod(functionAlias))) {
             writer.writeLine("typedef " + functionAlias.name + " = " + typeToString(functionAlias.returnType, scope) + " Function" + parametersToString(functionAlias.parameters, scope) + ";")
         }
@@ -416,14 +423,33 @@ const writeFunctionAliases = (library: Library, writer: Writer): void => {
 export const writeLibrary = (library: Library): void => {
     rimraf.sync(config.outFolder);
 
-    for (const clazz of library.classes) {
-        writeClass(library, clazz, new Writer(clazz.name.toLowerCase() + ".dart"));
+
+    // for (const clazz of library.classes) {
+    //     writeClass(library, clazz, new Writer(clazz.name.toLowerCase() + ".dart"));
+    // }
+    // for (const interfaze of library.interfaces) {
+    //     writeInterface(library, interfaze, new Writer(interfaze.name.toLowerCase() + ".dart"));
+    // }
+    // for (const enm of library.enums) {
+    //     writeEnum(library, enm, new Writer(enm.name.toLowerCase() + ".dart"));
+    // }
+    // writeFunctionAliases(library, new Writer("type_aliases.dart"));
+
+
+
+    const writer = new Writer("babylon_dart_src.dart");
+
+    writer.writeLine("part of " + config.libraryName + ";");
+    writer.writeLine();
+
+    for (const enm of library.enums.sort((a, b) => a.name.localeCompare(b.name))) {
+        writeEnum(library, enm, writer);
     }
-    for (const interfaze of library.interfaces) {
-        writeInterface(library, interfaze, new Writer(interfaze.name.toLowerCase() + ".dart"));
-    }
-    for (const enm of library.enums) {
-        writeEnum(library, enm, new Writer(enm.name.toLowerCase() + ".dart"));
-    }
-    writeFunctionAliases(library, new Writer("type_aliases.dart"));
+    // for (const clazz of library.classes) {
+    //     writeClass(library, clazz, writer);
+    // }
+    // for (const interfaze of library.interfaces) {
+    //     writeInterface(library, interfaze, writer);
+    // }
+    writeFunctionAliases(library, writer);
 }

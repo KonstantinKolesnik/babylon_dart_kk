@@ -9,9 +9,7 @@
     "author": "Oliver Damm <oliver.damm@gmx.de>",
     "license": "MIT",
     "dependencies": {
-        "babylonjs": "4.2.0",
-        "babylonjs-loaders": "4.2.0",
-        "babylonjs-serializers": "4.2.0",
+        "babylonjs": "5.15.1",
 
 
 
